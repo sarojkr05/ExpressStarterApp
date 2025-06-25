@@ -10,7 +10,7 @@ async function registerUser(req, res) {
             error: {}
         });
     } catch (error) {
-         console.error("🔥 Error in registerUser:", error);
+         console.error("Error in registerUser:", error);
         return res.status(500).json({
             message: error.reason || "Internal server error",
             success: false,
