@@ -14,7 +14,7 @@ async function createUser(userDetails) {
         const response = await User.create(userDetails)
         return response;
     } catch (error) {
-         console.log("🔥 Error in userRepository:", error);
+         console.log("Error in userRepository:", error);
     }
 }
 

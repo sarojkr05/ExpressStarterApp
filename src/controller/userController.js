@@ -1,4 +1,3 @@
-const { error } = require("console");
 const createUserService = require("../service/userService");
 
 async function registerUser(req, res) {
