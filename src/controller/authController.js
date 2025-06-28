@@ -5,7 +5,6 @@ async function login(req, res) {
         const loginPayload = req.body;
 
         const token = await loginUser(loginPayload); //no conflict now
-        console.log()
 
         res.cookie("authToken", token, {
             httpOnly: true,

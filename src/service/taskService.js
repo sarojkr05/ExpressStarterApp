@@ -1,4 +1,4 @@
-const { createTaskRepo } = require("../repository/taskRepo");
+const { createTaskRepo, getAllTaskRepo, getTaskByIdRepo, updateTaskByIdRepo, deleteTaskById } = require("../repository/taskRepo");
 
 async function createTaskServ(taskDetails) {
     try {
@@ -10,6 +10,50 @@ async function createTaskServ(taskDetails) {
     }
 }
 
+async function getAllTaskServ() {
+    try {
+        const tasks = await getAllTaskRepo()
+        return tasks;
+    } catch (error) {
+        console.log("Error fetching tasks from service", error)
+        throw error
+    }
+}
+
+async function getTaskByIdServ(taskId) {
+    try {
+        const task = await getTaskByIdRepo(taskId);
+        return task;
+    } catch (error) {
+        console.log("Error fetching tasks from service", error)
+        throw error
+    }
+}
+
+async function updateTaskByIdServ(taskId, updatedData) {
+    try {
+        const task = await updateTaskByIdRepo(taskId, updatedData);
+        return task;
+    } catch (error) {
+        console.log("Error fetching tasks from service", error)
+        throw error
+    }
+}
+
+async function deleteTaskByIdSer(taskId) {
+    try {
+        const task = await deleteTaskById(taskId);
+        return task;
+    } catch (error) {
+        console.log("Error fetching tasks from service", error)
+        throw error
+    }
+}
+
 module.exports = {
-    createTaskServ
+    createTaskServ,
+    getAllTaskServ,
+    getTaskByIdServ,
+    updateTaskByIdServ,
+    deleteTaskByIdSer
 }

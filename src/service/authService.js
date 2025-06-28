@@ -17,6 +17,7 @@ async function loginUser(authDetails) {
         throw { message: "No user found with this email", statusCode: 404 }
     }
     // if the user is found we need to compare plain pass wih hashed one
+
     const isPasswordValidate = await bcrypt.compare(plainPasswod, user.password);
 
     if(!isPasswordValidate) {
