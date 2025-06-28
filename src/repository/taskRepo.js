@@ -12,7 +12,7 @@ async function createTaskRepo(taskDetails) {
 
 async function getAllTaskRepo() {
     try {
-        const tasks = await Task.find();
+        const tasks = await Task.find().populate("assignedTo", "firstName lastName email")
         return tasks
     } catch (error) {
         console.log("Error fetching all task", error)
@@ -22,7 +22,9 @@ async function getAllTaskRepo() {
 
 async function getTaskByIdRepo(taskId) {
     try {
-        const task = await Task.findById(taskId);
+        const task = await Task.findById(taskId)
+        .populate("assignedTo", "firstName email")
+        .populate("createdBy", "_id")
         return task
     } catch (error) {
         console.log("Error fetching all task", error)

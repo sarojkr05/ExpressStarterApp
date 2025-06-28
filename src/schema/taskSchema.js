@@ -22,6 +22,15 @@ const TaskSchema = new mongoose.Schema({
         type: String,
         enum: ["low", "medium", "high"],
         default: "low"
+    },
+    assignedTo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User" // This refers to your user model/schema
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 },
     {timestamps: true}
