@@ -4,7 +4,7 @@ async function login(req, res) {
     try {
         const loginPayload = req.body;
 
-        const token = await loginUser(loginPayload); //no conflict now
+        const { token, userData } = await loginUser(loginPayload);
 
         res.cookie("authToken", token, {
             httpOnly: true,
@@ -15,7 +15,8 @@ async function login(req, res) {
         return res.status(200).json({
             success: true,
             message: "Logged in successfully",
-            token: token
+            token: token,
+            userData: userData
         });
     } catch (error) {
         console.log("Error while logging in user:", error);
