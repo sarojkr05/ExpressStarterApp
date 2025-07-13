@@ -5,7 +5,8 @@ const userRouter = require("./routes/userRoutes.js");
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoutes.js");
 const taskRouter = require("./routes/taskRoutes.js");
-const cors = require('cors');
+const cors = require('cors')
+
 const app = express();
 
 app.use(cookieParser());
@@ -14,7 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({
     origin: "http://localhost:5173",
-    credentials: true
+    credentials: true // allows to send cookies
 }))
 
 // this is the place where the endpoints starts from

@@ -1,3 +1,4 @@
+const { createProjectRepo, getAllProjectRepo } = require("../repository/projectRepository.js");
 const {
   createTaskRepo,
   getAllTaskRepo,
@@ -7,60 +8,60 @@ const {
 } = require("../repository/taskRepo");
 const User = require("../schema/userSchema.js");
 
-async function createTaskServ(taskDetails) {
+async function createProjectServ(projectDetails) {
   try {
-    if (taskDetails.assignedTo) {
-      const assignedUser = await User.findById(taskDetails.assignedTo);
+    if (projectDetails.assignedTo) {
+      const assignedUser = await User.findById(projectDetails.assignedTo);
       if (!assignedUser) {
         throw new Error("Assigned user not found");
       }
     }
-    const res = await createTaskRepo(taskDetails);
+    const res = await createProjectRepo(projectDetails);
     return res;
   } catch (error) {
-    console.log("error creating task from service", error);
+    console.log("error creating project from service", error);
     throw error;
   }
 }
 
-async function getAllTaskServ() {
+async function getAllProjectServ() {
   try {
-    const tasks = await getAllTaskRepo();
-    return tasks;
+    const projects = await getAllProjectRepo();
+    return projects;
   } catch (error) {
-    console.log("Error fetching tasks from service", error);
+    console.log("Error fetching projects from service", error);
     throw error;
   }
 }
 
-async function getTaskByIdServ(taskId) {
+async function getProjectByIdServ(projectId) {
   try {
-    const task = await getTaskByIdRepo(taskId);
-    return task;
+    const project = await getTaskByIdRepo(projectId);
+    return project;
   } catch (error) {
-    console.log("Error fetching tasks from service", error);
+    console.log("Error fetching project from service", error);
     throw error;
   }
 }
 
-async function updateTaskByIdServ(taskId, userId, updatedData) {
+async function updateProjectByIdServ(projectId, userId, updatedData) {
   try {
 
-    const task = await getTaskByIdRepo(taskId);
-    if (!task) {
-      throw { reason: "Task not found", statusCode: 404 };
+    const project = await getTaskByIdRepo(projectId);
+    if (!project) {
+      throw { reason: "Project not found", statusCode: 404 };
     }
     // Permission check
     const isOwner =
-      task.createdBy?._id?.toString?.() === userId ||
-      task.createdBy?.toString?.() === userId;
+      project.createdBy?._id?.toString?.() === userId ||
+      project.createdBy?.toString?.() === userId;
     const isAssignee = task.assignedTo?.toString() === userId;
 
     if (!isAssignee && !isOwner) {
       throw { reason: "Unauthorized to updated this task" };
     }
 
-    const updatedTask = await updateTaskByIdRepo(taskId, updatedData);
+    const updatedProject = await updateTaskByIdRepo(taskId, updatedData);
     return updatedTask;
 
   } catch (error) {
@@ -94,6 +95,7 @@ async function deleteTaskByIdSer(taskId, userId) {
     throw error;
   }
 }
+
 
 module.exports = {
   createTaskServ,

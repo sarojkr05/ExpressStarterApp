@@ -18,7 +18,7 @@ async function authMiddleware(req, res, next) {
     }
 
     req.user = user; // Attach user info to request
-    next();
+    next(); // It allows us to move to the next middleware or route handler
   } catch (error) {
     console.error("Auth Middleware Error:", error);
     res.status(401).json({ success: false, message: "Unauthorized: Invalid token" });

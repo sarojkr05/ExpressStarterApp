@@ -11,7 +11,6 @@ async function login(req, res) {
             secure: false, // should be true in production with HTTPS
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
-
         return res.status(200).json({
             success: true,
             message: "Logged in successfully",

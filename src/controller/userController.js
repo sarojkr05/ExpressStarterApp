@@ -2,7 +2,7 @@ const createUserService = require("../service/userService");
 
 async function registerUser(req, res) {
     try {
-        const user = await createUserService(req.body); // ✅ don't overwrite `res`
+        const user = await createUserService(req.body); 
         return res.status(201).json({
             message: "Successfully created the user",
             success: true,

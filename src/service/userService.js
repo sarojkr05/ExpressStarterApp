@@ -10,7 +10,7 @@ async function createUserService(userDetails) {
     //1. We need to check if the user with this email already exists or not
      if(user) {
         // we found a user
-        throw {reason: "User with this email is already exists", statusCode: 500}
+        throw {reason: "User with this email is already exists", statusCode: 401}
     }
     //2. If not then create the user in the DB
     const newUser = await createUser({
